@@ -5,21 +5,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Map;
 
 
 @Controller
-public class controller {
+public class UserController {
 
     private UserRepository userRepository;
+
     private static final String isAdmin = "0";
 
     @Autowired
-    public controller(UserRepository userRepository) {
+    public UserController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
+
 
     @GetMapping("/index")
     public String signIn() {
@@ -31,10 +32,8 @@ public class controller {
         return "signup";
     }
 
-    @GetMapping("/hello")
-    public String hello() {
-        return "hello";
-    }
+
+
 
     @PostMapping("/signup")
     public String signUP(User user,Map<String,Object> map) {
