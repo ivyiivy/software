@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <link rel="stylesheet" href="..\index.css">
+</head>
+<body>
+    <div class="main">
+        <div class="content">
+            <h1>坪山区政府大数据治理实时分析系统</h1>
+            <form  method="post">
+                <p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
+                <label for="name">用&nbsp;户&nbsp;名：&nbsp;</label>
+                <input type="test" autofocus="autofocus" id="name" name="name" required/><br/>
+                <label for="password1">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：</label>
+                <input type="password" id="password1" name="password"/><br/>
+                <label for="email">邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱：</label>
+                <input type="email" id="email" name="email"/>
+                <p>
+                    <button type="submit">提&nbsp;&nbsp;交</button>
+                </p>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

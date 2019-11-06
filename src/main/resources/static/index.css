@@ -1,0 +1,38 @@
+.main {
+    background-image: url("background.jpg");      /*#02f8de;*/
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: absolute; /*绝对定位*/
+    width: 100%;
+    height: 100%;
+}
+.content{
+    text-align: center;
+    padding: 150px 0px; /*设置内边距上下为100px,左右为0*/
+    margin: 0px auto; /*设置上、下外边距为0px，左右自适应*/
+}
+h1 {
+    font-family: "思源黑体 CN Heavy";
+    font-size: 50px;
+    font-weight: bold;
+}
+input{
+    /*display: block;*/
+    border: 1px solid white;
+    width: 250px;
+    height: 30px;
+    border-radius: 15px;
+    margin: 15px auto;
+    padding: 5px;
+}
+button{
+    background: #20a1ff;
+    border-radius: 15px;
+    border: 0;
+    height: 40px;
+    width: 90px;
+    padding: 5px;
+    color: white;
+    font-size: 20px;
+}

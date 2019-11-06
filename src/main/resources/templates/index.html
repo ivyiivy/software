@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" , xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <link rel="stylesheet" href="..\index.css">
+</head>
+<body>
+<div class="main">
+    <div class="content">
+        <h1>坪山区政府大数据治理实时分析系统</h1>
+        <form action=" /index" method="post">
+            <p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
+            <label for="email">邮&nbsp;&nbsp;&nbsp;箱：</label>
+            <input type="test" autofocus="autofocus" id="email" name="email" required/><br/>
+            <label for="password">密&nbsp;&nbsp;&nbsp;码：</label>
+            <input type="password" id="password" name="password" required/>
+            <p>
+                <button type="submit">登&nbsp;&nbsp;录</button>
+                <button type="button" onclick="window.location.href='signup'">注&nbsp;&nbsp;册</button>
+            </p>
+        </form>
+    </div>
+</div>
+</body>
+</html>
