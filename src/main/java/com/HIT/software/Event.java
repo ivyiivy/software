@@ -1,6 +1,7 @@
 package com.HIT.software;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "event")
@@ -8,8 +9,8 @@ public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int REC_ID;
-    private String CREATE_TIME;
-    private String STREET_NAME;
+    private String createtime;
+    private String streetname;
     private String COMMUNITY_NAME;
     private String EVENT_TYPE_NAME;
     private String MAIN_TYPE_NAME;
@@ -29,20 +30,20 @@ public class Event {
         this.REC_ID = REC_ID;
     }
 
-    public String getCREATE_TIME() {
-        return CREATE_TIME;
+    public String getCreatetime() {
+        return createtime;
     }
 
-    public void setCREATE_TIME(String CREATE_TIME) {
-        this.CREATE_TIME = CREATE_TIME;
+    public void setCreatetime(String createtime) {
+        this.createtime = createtime;
     }
 
-    public String getSTREET_NAME() {
-        return STREET_NAME;
+    public String getStreetname() {
+        return streetname;
     }
 
-    public void setSTREET_NAME(String STREET_NAME) {
-        this.STREET_NAME = STREET_NAME;
+    public void setStreetname(String streetname) {
+        this.streetname = streetname;
     }
 
     public String getCOMMUNITY_NAME() {
