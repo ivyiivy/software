@@ -61,7 +61,7 @@ public class UserController {
             return "index";
         }
 
-        return "redirect:/hello";
+        return "redirect:/page1";
 
 
     }
