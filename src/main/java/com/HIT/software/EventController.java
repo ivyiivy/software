@@ -7,7 +7,10 @@ import netscape.javascript.JSException;
 import netscape.javascript.JSObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.script.ScriptTemplateConfig;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -37,16 +40,12 @@ public class EventController {
         return;
     }
 
-    public ArrayList<String> Handle(List<Event> list) throws JsonProcessingException {
-        ArrayList<String> ans = new ArrayList<>();
-        String data;
-        ObjectMapper mapper = new ObjectMapper();
+    public EventProperty Handle(List<Event> list) throws JsonProcessingException {
+        EventProperty data = new EventProperty();
         int ganxie = 0, jianyi = 0, qiujue = 0, tousu = 0, zixun = 0, qita = 0;
         for (Event event : list){
             if (event.getEventpropertyname().equals("感谢")){
                 ganxie += 1;
-//                String str = mapper.writeValueAsString(event);
-//                System.out.println(str);
             }
             else if (event.getEventpropertyname().equals("建议")){
                 jianyi += 1;
@@ -65,6 +64,7 @@ public class EventController {
             }
 
         }
+<<<<<<< HEAD
         data = ("{value: " + ganxie + ", name:感谢}");
         ans.add(data);
 
@@ -84,6 +84,15 @@ public class EventController {
         ans.add(data);
 
         return ans;
+=======
+        data.setGanxie(ganxie);
+        data.setJianyi(jianyi);
+        data.setQita(qita);
+        data.setQiujue(qiujue);
+        data.setTousu(tousu);
+        data.setZixun(zixun);
+        return data;
+>>>>>>> lianghanzhao
     }
 
     @Autowired
@@ -101,24 +110,28 @@ public class EventController {
         return "page2";
     }
 
-    @PostMapping("/page1")
-    public String getDate(String year_1, String month_1, String day_1){
-        date = (year_1 + "-" + month_1 + "-" + day_1 + " 23:59:59");
-        System.out.println(date);
-        return "redirect:/hello";
-    }
+//    @GetMapping("/caonima")
+//    public String caonima(){
+//        return "caonima";
+//    }
 
+    @PostMapping("/page1")
+
+<<<<<<< HEAD
     @GetMapping("/page1")
     @ResponseBody
     public ArrayList<String> findByDate() throws JsonProcessingException {
+=======
+    public String getDate(String year_1, String month_1, String day_1,Model model) throws JsonProcessingException {
+        date = (year_1 + "-" + month_1 + "-" + day_1 + " 23:59:59");
+//        System.out.println(date);
+>>>>>>> lianghanzhao
         init_today();
-//        for (Event event : today){
-//            String str = event.getCreatetime();
-//            System.out.println(str);
-//        }
+        ObjectMapper mapper = new ObjectMapper();
+        EventProperty eventProperty = new EventProperty();
         List<Event> events = eventRepository.findAll();
         List<Event> eventList = new ArrayList<>();
-        ArrayList<String> json;
+        String jsondata;
         for (Event event : events){
             String create_date = event.getCreatetime();
 //            System.out.println(create_date);
@@ -132,17 +145,33 @@ public class EventController {
 //        }
         if (eventList.isEmpty())
         {
+<<<<<<< HEAD
             if(!today.isEmpty())
                 json = Handle(today);
+=======
+            if(null != today){
+                eventProperty = Handle(today);
+                jsondata = mapper.writeValueAsString(eventProperty);
+            }
+>>>>>>> lianghanzhao
             else
-                json = null;
+                jsondata = null;
         }
         else{
-            json = Handle(eventList);
+            eventProperty = Handle(eventList);
+            jsondata = mapper.writeValueAsString(eventProperty);
         }
+<<<<<<< HEAD
 
 //        writeJsonToResponseByGson(json, response);
         return json;
+=======
+//        writeJsonToResponseByGson(json, response);\\
+
+        model.addAttribute("data", jsondata);
+        //return jsondata;
+        return "page1";
+>>>>>>> lianghanzhao
     }
 
 }
