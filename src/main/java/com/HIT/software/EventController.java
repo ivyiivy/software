@@ -12,13 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.lang.reflect.Array;
-//import com.google.gson.Gson;
-//import com.google.gson.GsonBuilder;
-//import com.google.gson.JsonArray;
-//import com.google.gson.JsonElement;
-//import com.google.gson.JsonObject;
-//import com.google.gson.JsonParser;
-//import com.*.trs.patentsearch.util.CnipsunUtils;
 import java.util.*;
 
 @Controller
@@ -29,12 +22,15 @@ public class EventController {
     private String end_date = "2018-10-30 23:59:59";
     private List<Event> today = new ArrayList<>();
 
+
     public void init_today(){
         List<Event> all= eventRepository.findAll();
         if (!all.isEmpty()){
             for(Event event : all){
-                if (event.getCreatetime().substring(0, 10).equals("2018-10-30")){
-                    today.add(event);
+                if (!event.getCreatetime().isBlank()){
+                    if (event.getCreatetime().substring(0, 10).equals("2018-10-30")){
+                        today.add(event);
+                    }
                 }
             }
         }
@@ -47,24 +43,24 @@ public class EventController {
         ObjectMapper mapper = new ObjectMapper();
         int ganxie = 0, jianyi = 0, qiujue = 0, tousu = 0, zixun = 0, qita = 0;
         for (Event event : list){
-            if (event.getEVENT_PROPERTY_NAME().equals("感谢")){
+            if (event.getEventpropertyname().equals("感谢")){
                 ganxie += 1;
 //                String str = mapper.writeValueAsString(event);
 //                System.out.println(str);
             }
-            else if (event.getEVENT_PROPERTY_NAME().equals("建议")){
+            else if (event.getEventpropertyname().equals("建议")){
                 jianyi += 1;
             }
-            else if (event.getEVENT_PROPERTY_NAME().equals("求决")){
+            else if (event.getEventpropertyname().equals("求决")){
                 qiujue += 1;
             }
-            else if (event.getEVENT_PROPERTY_NAME().equals("投诉")){
+            else if (event.getEventpropertyname().equals("投诉")){
                 tousu += 1;
             }
-            else if (event.getEVENT_PROPERTY_NAME().equals("咨询")){
+            else if (event.getEventpropertyname().equals("咨询")){
                 zixun += 1;
             }
-            else if (event.getEVENT_PROPERTY_NAME().equals("其他")){
+            else if (event.getEventpropertyname().equals("其他")){
                 qita += 1;
             }
 
@@ -86,6 +82,7 @@ public class EventController {
 
         data = ("{value: " + qita + ", name:其他}");
         ans.add(data);
+
         return ans;
     }
 
@@ -111,9 +108,9 @@ public class EventController {
         return "redirect:/hello";
     }
 
-    @GetMapping("/hello")
+    @GetMapping("/page1")
     @ResponseBody
-    public ArrayList<String> findByDate(HttpServletRequest request, HttpServletResponse response) throws JsonProcessingException {
+    public ArrayList<String> findByDate() throws JsonProcessingException {
         init_today();
 //        for (Event event : today){
 //            String str = event.getCreatetime();
@@ -135,7 +132,7 @@ public class EventController {
 //        }
         if (eventList.isEmpty())
         {
-            if(null != today)
+            if(!today.isEmpty())
                 json = Handle(today);
             else
                 json = null;
@@ -143,7 +140,7 @@ public class EventController {
         else{
             json = Handle(eventList);
         }
-        System.out.println(json);
+
 //        writeJsonToResponseByGson(json, response);
         return json;
     }
