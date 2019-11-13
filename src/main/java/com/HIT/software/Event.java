@@ -1,11 +1,14 @@
 package com.HIT.software;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "event")
 public class Event {
     @Id
+    @JsonIgnore
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int REC_ID;
     private String CREATE_TIME;
